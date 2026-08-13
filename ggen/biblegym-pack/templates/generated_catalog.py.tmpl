@@ -1,0 +1,13 @@
+---
+to: "src/biblegym/generated_catalog.py"
+force: true
+sparql:
+  capabilities: "PREFIX bg: <https://seanchatmangpt.github.io/biblegym#> SELECT ?iri ?binding ?title ?consequence ?order WHERE { ?c bg:capabilityIri ?iri ; bg:capabilityBinding ?binding ; bg:capabilityTitle ?title ; bg:consequence ?consequence ; bg:capabilityOrder ?order } ORDER BY ?order"
+---
+"""GENERATED projection of ggen/biblegym-pack/ontology.ttl. Do not hand-edit."""
+from __future__ import annotations
+from .compat import Capability, Consequence
+BIBLEGYM_CAPABILITIES: tuple[Capability, ...] = (
+{% for c in capabilities %}    Capability(iri="{{ c.iri }}", title="{{ c.title }}", consequence=Consequence.{{ c.consequence }}, binding="{{ c.binding }}"),
+{% endfor %})
+CAPABILITY_BY_BINDING = {c.binding: c for c in BIBLEGYM_CAPABILITIES}

@@ -1,0 +1,63 @@
+@prefix bg: <https://seanchatmangpt.github.io/biblegym#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sosa: <http://www.w3.org/ns/sosa/> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix odrl: <http://www.w3.org/ns/odrl/2/> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix org: <http://www.w3.org/ns/org#> .
+
+bg:BibleGym a rdfs:Class ; rdfs:label "BibleGym bounded church world" .
+bg:Church a rdfs:Class ; rdfs:subClassOf org:Organization .
+bg:FormationStep a rdfs:Class .
+bg:ServiceRoute a rdfs:Class .
+bg:VolunteerLifecycle a rdfs:Class .
+bg:HostedAutonomousGroup a rdfs:Class .
+bg:SafetyFence a rdfs:Class .
+
+bg:privacyFence a bg:SafetyFence ; skos:prefLabel "Do not persist raw confession, prayer narrative, precise location, biometric material, or payment credentials" .
+bg:feedbackFence a bg:SafetyFence ; skos:prefLabel "Feedback/cross-talk requires consent" .
+bg:careFence a bg:SafetyFence ; skos:prefLabel "Safety and deeper care route to appropriate human authority" .
+bg:autonomyFence a bg:SafetyFence ; skos:prefLabel "A hosted autonomous group remains governed by that group; church facility hosting does not imply ownership" .
+bg:authorityFence a bg:SafetyFence ; skos:prefLabel "DO capabilities require GymAct authority and canonical receipts when executed through the kernel" .
+
+bg:capability-01 a sosa:Procedure ; bg:capabilityOrder 1 ; bg:capabilityIri "urn:biblegym:capability:dashboard" ; bg:capabilityBinding "dashboard" ; bg:capabilityTitle "Read a principal-scoped church dashboard. Payload: {'actor_id': str}." ; bg:consequence "READ" .
+bg:capability-02 a sosa:Procedure ; bg:capabilityOrder 2 ; bg:capabilityIri "urn:biblegym:capability:leaderboard" ; bg:capabilityBinding "leaderboard" ; bg:capabilityTitle "Read opt-in quest leaderboard. Payload: {}." ; bg:consequence "READ" .
+bg:capability-03 a sosa:Procedure ; bg:capabilityOrder 3 ; bg:capabilityIri "urn:biblegym:capability:milestones" ; bg:capabilityBinding "milestones" ; bg:capabilityTitle "Read a person's milestones. Payload: {'person_id': str}." ; bg:consequence "READ" .
+bg:capability-04 a sosa:Procedure ; bg:capabilityOrder 4 ; bg:capabilityIri "urn:biblegym:capability:offline_content" ; bg:capabilityBinding "offline_content" ; bg:capabilityTitle "Read content metadata for offline sync. Payload: {}." ; bg:consequence "READ" .
+bg:capability-05 a sosa:Procedure ; bg:capabilityOrder 5 ; bg:capabilityIri "urn:biblegym:capability:devotion_prompt_packet" ; bg:capabilityBinding "devotion_prompt_packet" ; bg:capabilityTitle "Read a bounded sermon/scripture packet for an external planner or LLM to compose a devotion. Payload: {'person_id': str}." ; bg:consequence "READ" .
+bg:capability-06 a sosa:Procedure ; bg:capabilityOrder 6 ; bg:capabilityIri "urn:biblegym:capability:staffing_health" ; bg:capabilityBinding "staffing_health" ; bg:capabilityTitle "Read service staffing requirements, vacancies, no-shows and escalations. Payload: {'event_id': str|optional}." ; bg:consequence "READ" .
+bg:capability-07 a sosa:Procedure ; bg:capabilityOrder 7 ; bg:capabilityIri "urn:biblegym:capability:service_route" ; bg:capabilityBinding "service_route" ; bg:capabilityTitle "Read a need-to-follow-up service route. Payload: {'route_id': str}." ; bg:consequence "READ" .
+bg:capability-08 a sosa:Procedure ; bg:capabilityOrder 8 ; bg:capabilityIri "urn:biblegym:capability:register_person" ; bg:capabilityBinding "register_person" ; bg:capabilityTitle "Register a person profile with locale, auth assurance and consent preferences." ; bg:consequence "DO" .
+bg:capability-09 a sosa:Procedure ; bg:capabilityOrder 9 ; bg:capabilityIri "urn:biblegym:capability:create_group" ; bg:capabilityBinding "create_group" ; bg:capabilityTitle "Create a small group/accountability community." ; bg:consequence "DO" .
+bg:capability-10 a sosa:Procedure ; bg:capabilityOrder 10 ; bg:capabilityIri "urn:biblegym:capability:join_group" ; bg:capabilityBinding "join_group" ; bg:capabilityTitle "Join a person to a group." ; bg:consequence "DO" .
+bg:capability-11 a sosa:Procedure ; bg:capabilityOrder 11 ; bg:capabilityIri "urn:biblegym:capability:host_autonomous_group" ; bg:capabilityBinding "host_autonomous_group" ; bg:capabilityTitle "Record a church facility-hosting agreement while preserving the hosted group's autonomy and non-ownership boundary." ; bg:consequence "DO" .
+bg:capability-12 a sosa:Procedure ; bg:capabilityOrder 12 ; bg:capabilityIri "urn:biblegym:capability:create_event" ; bg:capabilityBinding "create_event" ; bg:capabilityTitle "Create a church event/service with an optional required-volunteer count." ; bg:consequence "DO" .
+bg:capability-13 a sosa:Procedure ; bg:capabilityOrder 13 ; bg:capabilityIri "urn:biblegym:capability:rsvp_event" ; bg:capabilityBinding "rsvp_event" ; bg:capabilityTitle "One-tap RSVP using an existing profile." ; bg:consequence "DO" .
+bg:capability-14 a sosa:Procedure ; bg:capabilityOrder 14 ; bg:capabilityIri "urn:biblegym:capability:check_in" ; bg:capabilityBinding "check_in" ; bg:capabilityTitle "One-tap attendance or volunteer check-in." ; bg:consequence "DO" .
+bg:capability-15 a sosa:Procedure ; bg:capabilityOrder 15 ; bg:capabilityIri "urn:biblegym:capability:location_check_in" ; bg:capabilityBinding "location_check_in" ; bg:capabilityTitle "Consent-gated campus geofence check-in; precise coordinates are not stored." ; bg:consequence "DO" .
+bg:capability-16 a sosa:Procedure ; bg:capabilityOrder 16 ; bg:capabilityIri "urn:biblegym:capability:child_check_in" ; bg:capabilityBinding "child_check_in" ; bg:capabilityTitle "Guardian-authorized child check-in with hashed pickup token." ; bg:consequence "DO" .
+bg:capability-17 a sosa:Procedure ; bg:capabilityOrder 17 ; bg:capabilityIri "urn:biblegym:capability:publish_content" ; bg:capabilityBinding "publish_content" ; bg:capabilityTitle "Publish sermon/media/notes metadata, including offline availability." ; bg:consequence "DO" .
+bg:capability-18 a sosa:Procedure ; bg:capabilityOrder 18 ; bg:capabilityIri "urn:biblegym:capability:schedule_reminder" ; bg:capabilityBinding "schedule_reminder" ; bg:capabilityTitle "Schedule a bounded reminder intent; no external delivery occurs inside BibleGym." ; bg:consequence "DO" .
+bg:capability-19 a sosa:Procedure ; bg:capabilityOrder 19 ; bg:capabilityIri "urn:biblegym:capability:share_invite" ; bg:capabilityBinding "share_invite" ; bg:capabilityTitle "Create a one-click share intent for an event/group/content item." ; bg:consequence "DO" .
+bg:capability-20 a sosa:Procedure ; bg:capabilityOrder 20 ; bg:capabilityIri "urn:biblegym:capability:record_giving_intent" ; bg:capabilityBinding "record_giving_intent" ; bg:capabilityTitle "Record a giving intent in minor currency units; no payment instrument is stored or charged." ; bg:consequence "DO" .
+bg:capability-21 a sosa:Procedure ; bg:capabilityOrder 21 ; bg:capabilityIri "urn:biblegym:capability:publish_sermon" ; bg:capabilityBinding "publish_sermon" ; bg:capabilityTitle "Publish a sermon source with scripture references." ; bg:consequence "DO" .
+bg:capability-22 a sosa:Procedure ; bg:capabilityOrder 22 ; bg:capabilityIri "urn:biblegym:capability:create_quest_from_sermon" ; bg:capabilityBinding "create_quest_from_sermon" ; bg:capabilityTitle "Project a sermon point into a scripture-linked small daily quest." ; bg:consequence "DO" .
+bg:capability-23 a sosa:Procedure ; bg:capabilityOrder 23 ; bg:capabilityIri "urn:biblegym:capability:complete_quest" ; bg:capabilityBinding "complete_quest" ; bg:capabilityTitle "Record quest completion and derive points, badges and milestones." ; bg:consequence "DO" .
+bg:capability-24 a sosa:Procedure ; bg:capabilityOrder 24 ; bg:capabilityIri "urn:biblegym:capability:set_habit_stack" ; bg:capabilityBinding "set_habit_stack" ; bg:capabilityTitle "Set an after-existing-routine -> small-practice habit stack, including two-minute practices." ; bg:consequence "DO" .
+bg:capability-25 a sosa:Procedure ; bg:capabilityOrder 25 ; bg:capabilityIri "urn:biblegym:capability:link_accountability" ; bg:capabilityBinding "link_accountability" ; bg:capabilityTitle "Link accountability partners with bilateral consent." ; bg:consequence "DO" .
+bg:capability-26 a sosa:Procedure ; bg:capabilityOrder 26 ; bg:capabilityIri "urn:biblegym:capability:submit_scripture_quiz" ; bg:capabilityBinding "submit_scripture_quiz" ; bg:capabilityTitle "Submit scripture-quiz result tied to an explicit scripture reference." ; bg:consequence "DO" .
+bg:capability-27 a sosa:Procedure ; bg:capabilityOrder 27 ; bg:capabilityIri "urn:biblegym:capability:recruit_volunteer" ; bg:capabilityBinding "recruit_volunteer" ; bg:capabilityTitle "Enter a volunteer candidate into a visible recruitment lifecycle." ; bg:consequence "DO" .
+bg:capability-28 a sosa:Procedure ; bg:capabilityOrder 28 ; bg:capabilityIri "urn:biblegym:capability:onboard_volunteer" ; bg:capabilityBinding "onboard_volunteer" ; bg:capabilityTitle "Advance a volunteer candidate to onboarded after explicit readiness checks." ; bg:consequence "DO" .
+bg:capability-29 a sosa:Procedure ; bg:capabilityOrder 29 ; bg:capabilityIri "urn:biblegym:capability:assign_volunteer" ; bg:capabilityBinding "assign_volunteer" ; bg:capabilityTitle "Assign an onboarded volunteer to a service route/role." ; bg:consequence "DO" .
+bg:capability-30 a sosa:Procedure ; bg:capabilityOrder 30 ; bg:capabilityIri "urn:biblegym:capability:assign_cochair" ; bg:capabilityBinding "assign_cochair" ; bg:capabilityTitle "Assign an onboarded volunteer as a co-chair/team lead for a ministry route." ; bg:consequence "DO" .
+bg:capability-31 a sosa:Procedure ; bg:capabilityOrder 31 ; bg:capabilityIri "urn:biblegym:capability:opt_out_volunteer" ; bg:capabilityBinding "opt_out_volunteer" ; bg:capabilityTitle "Record a volunteer opt-out and release active assignments without further notification intent." ; bg:consequence "DO" .
+bg:capability-32 a sosa:Procedure ; bg:capabilityOrder 32 ; bg:capabilityIri "urn:biblegym:capability:record_no_show" ; bg:capabilityBinding "record_no_show" ; bg:capabilityTitle "Record a volunteer no-show and open an explicit staffing gap." ; bg:consequence "DO" .
+bg:capability-33 a sosa:Procedure ; bg:capabilityOrder 33 ; bg:capabilityIri "urn:biblegym:capability:escalate_staffing_gap" ; bg:capabilityBinding "escalate_staffing_gap" ; bg:capabilityTitle "Escalate an open staffing gap to a named governance route." ; bg:consequence "DO" .
+bg:capability-34 a sosa:Procedure ; bg:capabilityOrder 34 ; bg:capabilityIri "urn:biblegym:capability:create_service_route" ; bg:capabilityBinding "create_service_route" ; bg:capabilityTitle "Create need -> route -> door -> role -> assignment -> evidence -> receipt -> follow-up linkage." ; bg:consequence "DO" .
+bg:capability-35 a sosa:Procedure ; bg:capabilityOrder 35 ; bg:capabilityIri "urn:biblegym:capability:route_bible_need" ; bg:capabilityBinding "route_bible_need" ; bg:capabilityTitle "Route a bounded Bible/scripture need to content, group, mentor or pastoral care without storing a private narrative." ; bg:consequence "DO" .
+bg:capability-36 a sosa:Procedure ; bg:capabilityOrder 36 ; bg:capabilityIri "urn:biblegym:capability:record_follow_up" ; bg:capabilityBinding "record_follow_up" ; bg:capabilityTitle "Record a bounded follow-up outcome against a person/service route." ; bg:consequence "DO" .
+bg:capability-37 a sosa:Procedure ; bg:capabilityOrder 37 ; bg:capabilityIri "urn:biblegym:capability:record_prayer_request" ; bg:capabilityBinding "record_prayer_request" ; bg:capabilityTitle "Record a privacy-minimized prayer request category and consent, never raw private prayer text." ; bg:consequence "DO" .
+bg:capability-38 a sosa:Procedure ; bg:capabilityOrder 38 ; bg:capabilityIri "urn:biblegym:capability:record_formation_step" ; bg:capabilityBinding "record_formation_step" ; bg:capabilityTitle "Record only bounded formation metadata and a next faithful action; raw confession detail is refused." ; bg:consequence "DO" .
+bg:capability-39 a sosa:Procedure ; bg:capabilityOrder 39 ; bg:capabilityIri "urn:biblegym:capability:grant_feedback_consent" ; bg:capabilityBinding "grant_feedback_consent" ; bg:capabilityTitle "Grant or revoke consent for feedback/cross-talk from a named person/group." ; bg:consequence "DO" .
+bg:capability-40 a sosa:Procedure ; bg:capabilityOrder 40 ; bg:capabilityIri "urn:biblegym:capability:record_care_handoff" ; bg:capabilityBinding "record_care_handoff" ; bg:capabilityTitle "Record a privacy-minimized pastoral/professional/safety routing handoff." ; bg:consequence "DO" .

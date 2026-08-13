@@ -1,0 +1,4 @@
+[pack]
+name = "biblegym-pack"
+version = "26.8.12"
+description = "Canonical BibleGym capability and safety vocabulary. Templates echo admitted capability facts; GymAct owns execution and receipts."
