@@ -138,7 +138,23 @@ class BibleGymTests(unittest.TestCase):
         self.act(env, "schedule_reminder", person_id="v1", subject_ref="event:sun", local_time="08:30")
         self.act(env, "share_invite", actor_id="v1", subject_ref="group:g1", channel="link")
         self.assertEqual(len(self.act(env, "offline_content")), 1)
-        self.assertEqual(run(env.observe())["checkins"], 1)
+        self.act(env, "set_next_step", person_id="v1", step_ref="serve:welcome", status="ACTIVE")
+        self.act(env, "qr_check_in", person_id="v1", event_id="sun", qr_subject_ref="event:sun")
+        note_digest = hashlib.sha256(b"encrypted-note").hexdigest()
+        self.act(env, "record_content_note", person_id="v1", content_id="c1", note_digest=note_digest, encrypted_ref="device:vault:note-1")
+        manifest = self.act(env, "content_sync_manifest")
+        self.assertEqual(manifest[0]["note_refs"], 1)
+        message = self.act(env, "message_intent", actor_id="v1", recipient_ref="group:g1", subject_ref="event:sun", template_ref="welcome-reminder")
+        self.assertEqual(message["delivery"], "INTENT_ONLY")
+        contact = self.act(env, "contact_intent", actor_id="v1", contact_ref="leader:welcome", action="text")
+        self.assertEqual(contact["delivery"], "INTENT_ONLY")
+        assertion = self.act(env, "record_biometric_assertion", person_id="v1", verified=True)
+        self.assertTrue(assertion["verified"])
+        with self.assertRaises(PermissionError):
+            self.act(env, "record_biometric_assertion", person_id="v1", verified=True, biometric="face-template")
+        with self.assertRaises(PermissionError):
+            self.act(env, "message_intent", actor_id="v1", recipient_ref="group:g1", subject_ref="event:sun", template_ref="x", body="freeform")
+        self.assertEqual(run(env.observe())["checkins"], 2)
         staffing = self.act(env, "staffing_health", event_id="sun")[0]
         self.assertEqual((staffing["required"], staffing["assigned"], staffing["vacancies"]), (3, 1, 2))
 
@@ -288,7 +304,7 @@ class BibleGymTests(unittest.TestCase):
         ontology = set(re.findall(r'bg:capabilityBinding "([^"]+)"', ttl))
         generated = set(CAPABILITY_BY_BINDING)
         self.assertEqual(ontology, generated)
-        self.assertGreaterEqual(len(generated), 40)
+        self.assertGreaterEqual(len(generated), 47)
         self.assertIn("org:Organization", ttl)
         self.assertIn("AUTONOMOUS", pathlib.Path(root / "src/biblegym/environment.py").read_text())
 

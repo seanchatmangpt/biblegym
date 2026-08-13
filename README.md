@@ -11,7 +11,8 @@ GymAct remains the execution/evidence boundary. BibleGym does not plan, preach, 
 ## Implemented domain surface
 
 - Global church tenancy: church/campus identity, BCP47-like locale, IANA timezone, currency and local Bible translation preference.
-- One-tap profile, RSVP, attendance/volunteer check-in; optional consent-gated geofence check-in.
+- One-tap profile, RSVP, attendance/volunteer check-in; QR event check-in; optional consent-gated geofence check-in.
+- Next Steps, intent-only messaging/contact shortcuts, offline content-sync manifests, client-encrypted note references, and platform biometric assertions without biometric material.
 - Guardian child check-in with pickup-secret hashing; no raw pickup secret persistence.
 - Groups, accountability, events, sharing intents, reminders and offline content metadata.
 - Welcome-team lifecycle from an empty roster: recruit -> onboard -> assign/co-chair -> check-in, with opt-out, notification stop, no-show gap creation, staffing-health inspection and governance escalation.
