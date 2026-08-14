@@ -8,4 +8,4 @@ source = "ggen/biblegym-pack/ontology.ttl"
 biblegym-pack = { path = "ggen/biblegym-pack" }
 
 [templates]
-dir = "ggen/biblegym-pack/templates"
+dir = "templates"
