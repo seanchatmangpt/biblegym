@@ -1,0 +1,12 @@
+PREFIX bg: <https://seanchatmangpt.github.io/biblegym#>
+PREFIX sosa: <http://www.w3.org/ns/sosa/>
+SELECT ?capability ?missing WHERE {
+  ?capability a sosa:Procedure .
+  VALUES (?predicate ?missing) {
+    (bg:capabilityIri "capabilityIri")
+    (bg:capabilityBinding "capabilityBinding")
+    (bg:capabilityTitle "capabilityTitle")
+    (bg:consequence "consequence")
+  }
+  FILTER NOT EXISTS { ?capability ?predicate ?value }
+}

@@ -1,0 +1,11 @@
+[project]
+name = "biblegym"
+
+[ontology]
+source = "ggen/biblegym-pack/ontology.ttl"
+
+[packs]
+biblegym-pack = { path = "ggen/biblegym-pack" }
+
+[templates]
+dir = "templates"

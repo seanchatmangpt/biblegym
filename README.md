@@ -11,9 +11,13 @@ GymAct remains the execution/evidence boundary. BibleGym does not plan, preach, 
 ## Implemented domain surface
 
 - Global church tenancy: church/campus identity, BCP47-like locale, IANA timezone, currency and local Bible translation preference.
-- One-tap profile, RSVP, attendance/volunteer check-in; optional consent-gated geofence check-in.
+- One-tap profile, RSVP, attendance/volunteer check-in; QR event check-in; optional consent-gated geofence check-in.
+- Next Steps, intent-only messaging/contact shortcuts, offline content-sync manifests, client-encrypted note references, and platform biometric assertions without biometric material.
 - Guardian child check-in with pickup-secret hashing; no raw pickup secret persistence.
-- Groups, accountability, events, volunteer routes, sharing intents, reminders and offline content metadata.
+- Groups, accountability, events, sharing intents, reminders and offline content metadata.
+- Welcome-team lifecycle from an empty roster: recruit -> onboard -> assign/co-chair -> check-in, with opt-out, notification stop, no-show gap creation, staffing-health inspection and governance escalation.
+- Need-to-follow-up `ServiceRoute` records: need -> route -> door -> role -> assignment -> evidence -> receipt -> follow-up.
+- Privacy-minimized prayer requests, Bible-need routing and follow-up; hosted autonomous groups explicitly preserve group governance while the church remains facility host, not owner.
 - Giving *intent* only; no payment credentials or transaction actuation.
 - Sermon -> scripture-linked quest -> two-minute/habit-stack practice -> completion -> milestones/badges/opt-in leaderboard.
 - Scripture quiz and deterministic devotion prompt packets for external SELECT/CONSTRUCT systems.
