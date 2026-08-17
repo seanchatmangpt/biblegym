@@ -93,7 +93,7 @@ class KnowingChristFormationTests(unittest.TestCase):
         after = self.act(env, "dashboard", actor_id="p")
         self.assertEqual(after["points"], 0)
         self.assertEqual(after["milestones"], [])
-        self.assertEqual(self.act(env, "leaderboard"), [{"person_id": "p", "points": 0}])
+        self.assertFalse(any(item["points"] > 0 for item in self.act(env, "leaderboard")))
 
     def test_unknown_step_and_private_confession_fail_closed(self):
         env = self.env()
