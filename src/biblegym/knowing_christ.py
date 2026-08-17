@@ -62,8 +62,8 @@ _STEPS: tuple[dict[str, Any], ...] = (
         "id": "daily-dying",
         "order": 7,
         "title": "Daily Dying",
-        "scripture_refs": ["Luke 9:23-24"],
-        "theme": "Following Jesus is a repeated surrender, not a completed spiritual project.",
+        "scripture_refs": ["Luke 9:23-24", "Matthew 27:27-31"],
+        "theme": "Following Jesus is repeated surrender, not a completed spiritual project or a path to recognition.",
         "practice": "Choose one concrete act of self-denial that makes room to love God or neighbor.",
     },
     {
@@ -131,7 +131,7 @@ def knowing_christ_packet(*, bible_translation: str, locale: str) -> dict[str, A
         "cross_cutting": {
             "solitude": "Deliberate time alone with God that remains connected to love and community.",
             "isolation": "Withdrawal from truthful relationship or help; it is not treated as a spiritual achievement.",
-            "results": "Observed outcomes are evidence about events, never a score of spiritual worth or proof that God approves a person.",
+            "results": "Observed outcomes are evidence about events, never a score of spiritual worth, proof that God approves a person, or sufficient ground to infer belief or unbelief.",
         },
         "fences": [
             "NO_CONVERSION_SCORE",
