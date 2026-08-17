@@ -6,6 +6,7 @@ from typing import Any
 
 from .compat import Capability
 from .environment import BibleGymEnvironment, ChurchConfig, _required_str
+from .knowing_christ import PROGRAM_GOAL, knowing_christ_packet, step_ids
 
 
 class PaperFeatureEnvironment(BibleGymEnvironment):
@@ -28,6 +29,9 @@ class PaperFeatureEnvironment(BibleGymEnvironment):
         forbidden = {
             "body",
             "details",
+            "confession",
+            "graphic_detail",
+            "story",
             "raw_text",
             "note_text",
             "prayer_text",
@@ -129,6 +133,34 @@ class PaperFeatureEnvironment(BibleGymEnvironment):
                 person["auth_assurance"] = "platform-biometric-asserted"
             return result
 
+        if binding == "record_formation_step":
+            self._refuse_freeform(payload, "RAW_CONFESSION_STORAGE_REFUSED")
+            person_id = _required_str(payload, "person_id")
+            self._person(person_id)
+            stage = _required_str(payload, "stage").lower()
+            if stage not in {"admit", "believe", "surrender", "practice"}:
+                raise ValueError("stage must be Admit|Believe|Surrender|Practice")
+            process_step = payload.get("process_step")
+            if process_step is not None:
+                process_step = str(process_step)
+                if process_step not in step_ids():
+                    raise ValueError("process_step must identify a Knowing Christ formation step")
+            result = {
+                "person_id": person_id,
+                "stage": stage,
+                "scripture_ref": _required_str(payload, "scripture_ref"),
+                "setup_category": str(payload.get("setup_category", "unspecified")),
+                "next_faithful_action": _required_str(payload, "next_faithful_action"),
+                "risk": str(payload.get("risk", "none")),
+                "goal": PROGRAM_GOAL,
+            }
+            if process_step is not None:
+                result["process_step"] = process_step
+            state["formation_steps"].append(result)
+            # Formation deliberately does not call _award(). Spiritual practice is
+            # not converted into points, badges, leaderboards, or recognition.
+            return result
+
         return super()._mutate(capability, payload)
 
     def _read(self, binding: str, payload: dict[str, Any]) -> Any:
@@ -142,6 +174,13 @@ class PaperFeatureEnvironment(BibleGymEnvironment):
                 for item in self._state["content"].values()
                 if item.get("offline")
             ]
+        if binding == "devotion_prompt_packet":
+            packet = super()._read(binding, payload)
+            packet["formation_program"] = knowing_christ_packet(
+                bible_translation=self.config.bible_translation,
+                locale=self.config.locale,
+            )
+            return packet
         return super()._read(binding, payload)
 
 
