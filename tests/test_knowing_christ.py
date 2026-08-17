@@ -46,11 +46,19 @@ class KnowingChristFormationTests(unittest.TestCase):
             "Proverbs 11:24-25",
             "Matthew 13:24-30",
             "Matthew 6:9-13",
+            "Matthew 27:27-31",
             "Matthew 7:21-23",
             "Matthew 7:24-27",
             "Philippians 3:7-17",
         }:
             self.assertIn(expected, refs)
+
+    def test_cross_cutting_principles_separate_solitude_isolation_and_results(self):
+        packet = knowing_christ_packet(bible_translation="NIV", locale="en-US")
+        principles = packet["cross_cutting"]
+        self.assertEqual(set(principles), {"solitude", "isolation", "results"})
+        self.assertNotEqual(principles["solitude"], principles["isolation"])
+        self.assertIn("belief or unbelief", principles["results"])
 
     def test_program_explicitly_refuses_recognition_scoring_and_ai_authority(self):
         packet = knowing_christ_packet(bible_translation="NIV", locale="en-US")
