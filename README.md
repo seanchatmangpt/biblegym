@@ -23,6 +23,14 @@ GymAct remains the execution/evidence boundary. BibleGym does not plan, preach, 
 - Scripture quiz and deterministic devotion prompt packets for external SELECT/CONSTRUCT systems.
 - Friday Night Fellowship formation rail: Admit -> Believe -> Surrender -> Practice, bounded metadata only, next-faithful-action receipts, consent before feedback, and privacy-minimized care routing.
 
+## Knowing Christ formation process
+
+BibleGym now carries a deterministic 12-step `knowing-christ-v1` formation packet whose explicit goal is `know_christ`, not recognition, points, conversion scoring, or visible results. It is a daily process rather than a spiritual project plan. The steps are grounded by scripture references covering empty hands and providence, the Lord's Prayer, generous sowing, wheat and weeds, thorns and pruning, daily surrender, David's honest prayers, Joseph's experience of God's presence/providence, practicing Jesus' words, refusing recognition as the goal, and pressing on to know Christ.
+
+The existing `devotion_prompt_packet` exposes this program only as `CONSTRUCT_ONLY_NO_DO`. Formation records may name one of the 12 process steps, but they do not award points, badges, milestones, or leaderboard status. Scripture references are stored instead of copying translation text, so each church retains its configured Bible translation.
+
+The program explicitly refuses conversion scores, spiritual leaderboards, prosperity formulas, AI revelation claims, pastoral authority, and raw private confession storage. Results can be observed as events; they are never treated as a machine-calculated measure of spiritual worth or of God's approval.
+
 ## Safety/privacy fences
 
 BibleGym refuses raw confession/detail fields, precise-location persistence, payment-instrument storage, non-consensual accountability links, and detailed care-handoff narratives. Location check-in requires prior person consent plus a boolean geofence verdict. `record_care_handoff` records only category/reason/status. These are executable refusal paths, not documentation-only policy.
@@ -33,7 +41,7 @@ BibleGym refuses raw confession/detail fields, precise-location persistence, pay
 python -m unittest discover -s tests -v
 ```
 
-The tests execute the provider lifecycle, paper feature paths, privacy/safety refusals, global configuration, checkpoint/restore, and ontology/generated-catalog parity. When the real `gymact` package is installed, `biblegym.compat` uses its canonical `Capability` and `Consequence` classes directly; otherwise the same protocol surface is locally executable with a tiny compatibility type.
+The tests execute the provider lifecycle, paper feature paths, privacy/safety refusals, global configuration, checkpoint/restore, ontology/generated-catalog parity, and the Knowing Christ formation contract. When the real `gymact` package is installed, `biblegym.compat` uses its canonical `Capability` and `Consequence` classes directly; otherwise the same protocol surface is locally executable with a tiny compatibility type.
 
 ### Standing
 
